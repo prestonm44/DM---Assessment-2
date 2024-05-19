@@ -92,10 +92,13 @@ const EN_PIRATE_LOOKUP = {
 };
 
 function translateToPirateTalk(phrase) {
-    let translatedPhrase = ''
-    for (word in EN_PIRATE_LOOKUP) {
-      return phrase;
-    }
+    let words = phrase.split(' ');
+    const translatedWords = words.map(word => {
+      if (EN_PIRATE_LOOKUP.hasOwnProperty(word)) { //**had to learn about hasOwnProperty for this one**//
+        return EN_PIRATE_LOOKUP[word];
+      }
+    })
+    return translatedWords.join(' ');
 };
 
 // Return the number of occurrences of each word in a string.
@@ -106,13 +109,13 @@ function translateToPirateTalk(phrase) {
 //   wordCount('hello world')
 //   => { hello: 1, world: 1 }
 function wordCount(str) {
-//   let result = {};
+  let result = {};
 
-//   str.split(" ").forEach(function(el, i, arr) {
-//     result[el] = result[el] ? ++result[el] : 1;
-//   });
-//   return result;
-// }
+  str.split(' ').forEach(function(el) {
+    result[el] = result[el] ? ++result[el] : 1;
+  });
+  return result;
+}
 
 // Given an object representing a bug, return true if the given bug is
 // available in the given month.
